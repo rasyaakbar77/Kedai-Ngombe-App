@@ -15,6 +15,13 @@ public class MenuUserFrame extends javax.swing.JFrame {
     /**
      * Creates new form MenuUserFrame
      */
+    
+    private User user;
+
+    public MenuUserFrame(User user) {
+        this();                 
+        this.user = user;
+    }
     public MenuUserFrame() {
         initComponents();
     }

@@ -11,6 +11,6 @@ package com.mycompany.kedaingombeapp;
 public class KedaiNgombeApp {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        new LoginFrame().setVisible(true);
     }
 }
