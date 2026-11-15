@@ -34,14 +34,14 @@ public class MenuUserFrame extends javax.swing.JFrame {
     }
   
     private void setGambarMenu() {
-        // 1. Sesuaikan path gambar sesuai lokasi file di folder src/package Anda
-        ImageIcon iconAsli = new ImageIcon(getClass().getResource("/Chocolate_Milk_Tea.jpg"));
-
-        // 2. Ubah ukuran (lebar, tinggi) menggunakan kelipatan 8, misal 160 x 160 piksel
-        Image imgKecil = iconAsli.getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH);
-
-        // 3. Pasang gambar yang sudah dikecilkan ke JLabel
-        jLabel2.setIcon(new ImageIcon(imgKecil));
+        java.net.URL imgUrl = getClass().getResource("/Chocolate_Milk_Tea.jpg");
+        if (imgUrl != null) {
+            ImageIcon iconAsli = new ImageIcon(imgUrl);
+            Image imgKecil = iconAsli.getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH);
+            jLabel2.setIcon(new ImageIcon(imgKecil));
+        } else {
+            System.out.println("Peringatan: File gambar /Chocolate_Milk_Tea.jpg tidak ditemukan di folder src/");
+        }
     }
 
     /**

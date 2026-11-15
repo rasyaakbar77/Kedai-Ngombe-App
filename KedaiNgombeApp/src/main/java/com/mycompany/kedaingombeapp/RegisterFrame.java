@@ -91,13 +91,8 @@ public class RegisterFrame extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(emailRegisterForm, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(namaRegisterForm, javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
                                 .addComponent(passwordRegisterForm, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(235, 235, 235))))
-=======
-                                .addComponent(passwordRegisterForm, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(246, Short.MAX_VALUE))
->>>>>>> e0303d2a9d5c8a79c56ab0efd900a1996e5cc9d4
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

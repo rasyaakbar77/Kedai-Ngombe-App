@@ -10,29 +10,29 @@ public class AuthService {
 
     // {Proses Login
     public User login(String email, String password) {
-        String query = "SELECT * FROM user WHERE email = ? AND PASSWORD = ?";
-        
+        String query = "SELECT id, NAME, email, ROLE FROM user WHERE email = ? AND PASSWORD = ?";
+
         try (Connection conn = DatabaseConnection.connect();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-            
-            pstmt.setString(1, email);
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, email.trim());
             pstmt.setString(2, password);
-            
             ResultSet rs = pstmt.executeQuery();
-            
+
             if (rs.next()) {
                 User user = new User();
                 user.setId(rs.getInt("id")); 
                 user.setNama(rs.getString("NAME")); 
                 user.setEmail(rs.getString("email"));
+                user.setRole(rs.getString("ROLE")); 
                 return user;
             }
-            
+
         } catch (SQLException e) {
             System.out.println("Error pada proses login: " + e.getMessage());
             e.printStackTrace();
         }
-        
+
         return null;
     }
  

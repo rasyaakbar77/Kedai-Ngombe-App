@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.kedaingombeapp;
+import com.mycompany.kedaingombeapp.Database.DatabaseConnection;
 
 /**
  *
@@ -72,7 +73,6 @@ public class LoginFrame extends javax.swing.JFrame {
                         .addGap(316, 316, 316)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-<<<<<<< HEAD
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(emailLoginForm, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -87,20 +87,6 @@ public class LoginFrame extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(passwordLoginFrom))))))
                 .addContainerGap(287, Short.MAX_VALUE))
-=======
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(emailLoginForm, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(passwordLoginFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(210, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnMasuk)
-                .addGap(46, 46, 46)
-                .addComponent(btnDaftar)
-                .addGap(302, 302, 302))
->>>>>>> e0303d2a9d5c8a79c56ab0efd900a1996e5cc9d4
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,14 +123,22 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void btnMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasukActionPerformed
         // TODO add your handling code here:
-        User user = authService.login(emailLoginForm.getText(),
+        User user = authService.login(emailLoginForm.getText().trim(),
                                       new String(passwordLoginFrom.getPassword()));
         if (user == null) {
             javax.swing.JOptionPane.showMessageDialog(this, "Email atau password salah");
             return;
         }
-        new MenuUserFrame(user).setVisible(true);
-        dispose();
+        
+        if ("admin".equalsIgnoreCase(user.getRole())) {
+            new MenuAdminFrame().setVisible(true);
+            dispose(); // Tutup form login
+        } else if ("customer".equalsIgnoreCase(user.getRole())) {
+            new MenuUserFrame(user).setVisible(true); 
+            dispose(); // Tutup form login
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Role tidak valid atau kosong: " + user.getRole());
+        }
     }//GEN-LAST:event_btnMasukActionPerformed
 
     /**

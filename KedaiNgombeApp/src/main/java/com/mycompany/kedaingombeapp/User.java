@@ -4,6 +4,7 @@ public class User {
     private int id;
     private String nama;
     private String email;
+    private String role;
 
     // Getter dan Setter
     public int getId() { return id; }
@@ -14,4 +15,7 @@ public class User {
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 }
