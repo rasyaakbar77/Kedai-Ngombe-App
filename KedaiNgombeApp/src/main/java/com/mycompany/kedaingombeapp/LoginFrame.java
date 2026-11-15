@@ -41,7 +41,6 @@ public class LoginFrame extends javax.swing.JFrame {
         passwordLoginFrom = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(995, 394));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("LOGIN KEDAI NGOMBE");
@@ -73,6 +72,7 @@ public class LoginFrame extends javax.swing.JFrame {
                         .addGap(316, 316, 316)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(emailLoginForm, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -87,6 +87,20 @@ public class LoginFrame extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(passwordLoginFrom))))))
                 .addContainerGap(287, Short.MAX_VALUE))
+=======
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(emailLoginForm, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(passwordLoginFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(210, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnMasuk)
+                .addGap(46, 46, 46)
+                .addComponent(btnDaftar)
+                .addGap(302, 302, 302))
+>>>>>>> e0303d2a9d5c8a79c56ab0efd900a1996e5cc9d4
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -3,9 +3,6 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[995, 394]"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -40,6 +37,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="emailLoginForm" min="-2" pref="316" max="-2" attributes="0"/>
                           </Group>
+<<<<<<< HEAD
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel3" min="-2" pref="87" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -52,6 +50,11 @@
                                   </Group>
                                   <Component id="passwordLoginFrom" max="32767" attributes="0"/>
                               </Group>
+=======
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="passwordLoginFrom" min="-2" pref="432" max="-2" attributes="0"/>
+>>>>>>> e0303d2a9d5c8a79c56ab0efd900a1996e5cc9d4
                           </Group>
                       </Group>
                   </Group>
