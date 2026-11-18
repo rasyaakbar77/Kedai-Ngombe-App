@@ -4,6 +4,8 @@
 
 package com.mycompany.kedaingombeapp;
 
+import com.mycompany.kedaingombeapp.ui.auth.LoginFrame;
+
 /**
  *
  * @author LOQ
