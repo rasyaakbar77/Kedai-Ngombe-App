@@ -132,8 +132,8 @@ public class RegisterFrame extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
-        boolean ok = authService.register(namaRegisterForm.getText(),
-                                          emailRegisterForm.getText(),
+        boolean ok = authService.register(namaRegisterForm.getText().trim(),
+                                          emailRegisterForm.getText().trim(),
                                           new String(passwordRegisterForm.getPassword()));
         if (!ok) {
             javax.swing.JOptionPane.showMessageDialog(this,
