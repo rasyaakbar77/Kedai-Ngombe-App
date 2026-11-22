@@ -84,6 +84,12 @@ public class MenuUserFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         panel1 = new java.awt.Panel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        lblTotal = new javax.swing.JLabel();
+        btnCheckout = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -93,50 +99,12 @@ public class MenuUserFrame extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
-        lblTotal = new javax.swing.JLabel();
-        btnCheckout = new javax.swing.JButton();
-        btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Cari :");
-        panel1.add(jLabel1);
-
-        jTextField1.setColumns(15);
-        jTextField1.addActionListener(this::jTextField1ActionPerformed);
-        panel1.add(jTextField1);
-
-        jButton1.setText("Semua");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        panel1.add(jButton1);
-
-        jButton2.setText("Milk Tea");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
-        panel1.add(jButton2);
-
-        jButton3.setText("Jasmine Tea");
-        jButton3.addActionListener(this::jButton3ActionPerformed);
-        panel1.add(jButton3);
-
-        jButton4.setText("Coffee");
-        jButton4.addActionListener(this::jButton4ActionPerformed);
-        panel1.add(jButton4);
-
-        jButton5.setText("Smoothies");
-        jButton5.addActionListener(this::jButton5ActionPerformed);
-        panel1.add(jButton5);
-
-        jButton6.setText("Freshmilk");
-        jButton6.addActionListener(this::jButton6ActionPerformed);
-        panel1.add(jButton6);
-
-        jButton7.setText("Black Tea");
-        jButton7.addActionListener(this::jButton7ActionPerformed);
-        panel1.add(jButton7);
+        setPreferredSize(new java.awt.Dimension(1024, 608));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1024, 608));
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane1.setViewportView(jPanel1);
 
@@ -148,15 +116,87 @@ public class MenuUserFrame extends javax.swing.JFrame {
         btnLogout.setText("Logout");
         btnLogout.addActionListener(this::btnLogoutActionPerformed);
 
+        jPanel2.setPreferredSize(new java.awt.Dimension(1024, 0));
+
+        jLabel1.setText("Cari :");
+
+        jTextField1.setColumns(15);
+        jTextField1.addActionListener(this::jTextField1ActionPerformed);
+
+        jButton1.setText("Semua");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
+        jButton2.setText("Milk Tea");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
+
+        jButton3.setText("Jasmine Tea");
+        jButton3.addActionListener(this::jButton3ActionPerformed);
+
+        jButton4.setText("Coffee");
+        jButton4.addActionListener(this::jButton4ActionPerformed);
+
+        jButton5.setText("Smoothies");
+        jButton5.addActionListener(this::jButton5ActionPerformed);
+
+        jButton6.setText("Freshmilk");
+        jButton6.addActionListener(this::jButton6ActionPerformed);
+
+        jButton7.setText("Black Tea");
+        jButton7.addActionListener(this::jButton7ActionPerformed);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addComponent(jLabel1)
+                .addGap(5, 5, 5)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jButton1)
+                .addGap(5, 5, 5)
+                .addComponent(jButton2)
+                .addGap(5, 5, 5)
+                .addComponent(jButton3)
+                .addGap(5, 5, 5)
+                .addComponent(jButton4)
+                .addGap(5, 5, 5)
+                .addComponent(jButton5)
+                .addGap(5, 5, 5)
+                .addComponent(jButton6)
+                .addGap(5, 5, 5)
+                .addComponent(jButton7)
+                .addContainerGap(136, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 20, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel1))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6)
+                    .addComponent(jButton7)))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
-                .addGap(333, 333, 333)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTotal)
@@ -169,11 +209,14 @@ public class MenuUserFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTotal)
                     .addComponent(btnCheckout)
@@ -307,6 +350,7 @@ public class MenuUserFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblTotal;

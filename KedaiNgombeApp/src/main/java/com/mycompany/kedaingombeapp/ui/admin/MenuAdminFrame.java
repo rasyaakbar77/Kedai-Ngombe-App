@@ -48,6 +48,8 @@ public class MenuAdminFrame extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(102, 0, 102));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
 
         lblJudul.setText("MENU ADMIN KEDAI NGOMBE");
 
@@ -67,20 +69,19 @@ public class MenuAdminFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(391, 391, 391)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(391, 391, 391)
+                        .addComponent(btnStok)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCashflow)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLogout))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblJudul)
                         .addGap(28, 28, 28)
-                        .addComponent(lblSalam))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(434, 434, 434)
-                        .addComponent(btnStok)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCashflow)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLogout)))
-                .addContainerGap(314, Short.MAX_VALUE))
+                        .addComponent(lblSalam)))
+                .addContainerGap(381, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,12 +90,12 @@ public class MenuAdminFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblJudul)
                     .addComponent(lblSalam))
-                .addGap(40, 40, 40)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnStok)
                     .addComponent(btnLogout)
                     .addComponent(btnCashflow))
-                .addContainerGap(430, Short.MAX_VALUE))
+                .addContainerGap(432, Short.MAX_VALUE))
         );
 
         pack();
