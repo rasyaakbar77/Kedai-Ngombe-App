@@ -167,7 +167,7 @@ public class MenuUserFrame extends javax.swing.JFrame {
                 .addComponent(jButton6)
                 .addGap(5, 5, 5)
                 .addComponent(jButton7)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

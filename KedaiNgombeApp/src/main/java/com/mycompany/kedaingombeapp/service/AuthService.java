@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 public class AuthService {
 
+    private final PasswordHasher passwordHasher = new PasswordHasher();
     // Proses Login
     public User login(String email, String password) {
         String query = "SELECT id, NAME, email, ROLE FROM user WHERE email = ? AND PASSWORD = ?";
@@ -17,16 +18,18 @@ public class AuthService {
             PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setString(1, email.trim());
-            pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
 
         if (rs.next()) {
-            User user = new User();
-            user.setId(rs.getInt("id"));
-            user.setNama(rs.getString("NAME"));
-            user.setEmail(rs.getString("email"));
-            user.setRole(rs.getString("ROLE"));   
-            return user;
+            String storedPassword = rs.getString("PASSWORD");
+                if (passwordHasher.verify(password, storedPassword)) {
+                    User user = new User();
+                    user.setId(rs.getInt("id"));
+                    user.setNama(rs.getString("NAME"));
+                    user.setEmail(rs.getString("email"));
+                    user.setRole(rs.getString("ROLE"));
+                    return user;
+                }
         }
 
         } catch (SQLException e) {
@@ -52,6 +55,7 @@ public class AuthService {
             return false;
         }
 
+        String hashedPassword = passwordHasher.hash(password);
         String query = "INSERT INTO user (NAME, email, PASSWORD, ROLE) VALUES (?, ?, ?, 'customer')";
         
         try (Connection conn = DatabaseConnection.connect();
@@ -59,7 +63,7 @@ public class AuthService {
             
             pstmt.setString(1, nama);
             pstmt.setString(2, email);
-            pstmt.setString(3, password);
+            pstmt.setString(3, hashedPassword);
             
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0;
