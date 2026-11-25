@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.kedaingombeapp.service;
 
 import com.mycompany.kedaingombeapp.database.DatabaseConnection;
@@ -13,11 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- *
- * @author LOQ
- */
 public class LaporanService {
 
     // Total pendapatan pada satu tanggal
@@ -31,17 +22,35 @@ public class LaporanService {
                 + "WHERE YEAR(created_at) = YEAR(?) AND MONTH(created_at) = MONTH(?)", tanggal, tanggal);
     }
 
+    // Total pendapatan dalam rentang tanggal (inklusif)
+    public int totalRentang(Date dari, Date sampai) {
+        return ambilAngka("SELECT COALESCE(SUM(total_harga), 0) FROM transactions "
+                + "WHERE DATE(created_at) BETWEEN ? AND ?", dari, sampai);
+    }
+
     // Daftar transaksi pada satu tanggal: {id, pembeli, total, bayar, kembalian, waktu}
     public List<Object[]> daftarHarian(Date tanggal) {
+        return ambilDaftar("WHERE DATE(t.created_at) = ?", tanggal);
+    }
+
+    // Daftar transaksi dalam rentang tanggal (inklusif), kolom sama dengan daftarHarian
+    public List<Object[]> daftarRentang(Date dari, Date sampai) {
+        return ambilDaftar("WHERE DATE(t.created_at) BETWEEN ? AND ?", dari, sampai);
+    }
+
+    // Helper: SELECT daftar transaksi dengan kondisi WHERE tertentu
+    private List<Object[]> ambilDaftar(String kondisi, Date... params) {
         List<Object[]> list = new ArrayList<>();
         String query = "SELECT t.id, u.NAME, t.total_harga, t.bayar, t.kembalian, t.created_at "
                 + "FROM transactions t LEFT JOIN user u ON t.user_id = u.id "
-                + "WHERE DATE(t.created_at) = ? ORDER BY t.created_at DESC";
+                + kondisi + " ORDER BY t.created_at DESC";
 
         try (Connection conn = DatabaseConnection.connect();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            pstmt.setDate(1, tanggal);
+            for (int i = 0; i < params.length; i++) {
+                pstmt.setDate(i + 1, params[i]);
+            }
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 list.add(new Object[]{
@@ -50,7 +59,7 @@ public class LaporanService {
                 });
             }
         } catch (SQLException e) {
-            System.out.println("Error pada proses laporan harian: " + e.getMessage());
+            System.out.println("Error pada proses laporan: " + e.getMessage());
             e.printStackTrace();
         }
         return list;

@@ -5,6 +5,7 @@
 package com.mycompany.kedaingombeapp.ui.admin;
 
 import com.mycompany.kedaingombeapp.service.LaporanService;
+import java.time.format.DateTimeParseException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -30,6 +31,8 @@ public class CashFlowAdminFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         siapkanTabel();
         txtTanggal.setText(LocalDate.now().toString());
+        txtDari.setText(LocalDate.now().toString());
+        txtSampai.setText(LocalDate.now().toString());
         tampilkanLaporan(Date.valueOf(LocalDate.now()));
     }
     
@@ -54,6 +57,17 @@ public class CashFlowAdminFrame extends javax.swing.JFrame {
         lblTotalBulan.setText("Pendapatan bulan ini: Rp " + laporanService.totalBulanan(tanggal));
         lblJumlah.setText("Jumlah transaksi: " + daftar.size());
     }
+    
+    private void tampilkanRentang(Date dari, Date sampai) {
+        tableModel.setRowCount(0);
+        List<Object[]> daftar = laporanService.daftarRentang(dari, sampai);
+        for (Object[] baris : daftar) {
+            tableModel.addRow(baris);
+        }
+        lblTotalHari.setText("Pendapatan periode: Rp " + laporanService.totalRentang(dari, sampai));
+        lblTotalBulan.setText("Periode: " + dari + " s/d " + sampai);
+        lblJumlah.setText("Jumlah transaksi: " + daftar.size());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,15 +87,23 @@ public class CashFlowAdminFrame extends javax.swing.JFrame {
         lblTotalHari = new javax.swing.JLabel();
         lblTotalBulan = new javax.swing.JLabel();
         lblJumlah = new javax.swing.JLabel();
+        txtDari = new javax.swing.JTextField();
+        txtSampai = new javax.swing.JTextField();
+        btnFilter = new javax.swing.JButton();
+        btnBulanIni = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 700));
         setResizable(false);
 
         btnKembali.setText("Kembali");
         btnKembali.addActionListener(this::btnKembaliActionPerformed);
 
         txtTanggal.setColumns(15);
+        txtTanggal.addActionListener(this::txtTanggalActionPerformed);
 
         btnTampil.setText("Tampilkan");
         btnTampil.addActionListener(this::btnTampilActionPerformed);
@@ -108,47 +130,92 @@ public class CashFlowAdminFrame extends javax.swing.JFrame {
 
         lblJumlah.setText("Jumlah transaksi: 0");
 
+        txtDari.addActionListener(this::txtDariActionPerformed);
+
+        txtSampai.addActionListener(this::txtSampaiActionPerformed);
+
+        btnFilter.setText("Filter");
+        btnFilter.addActionListener(this::btnFilterActionPerformed);
+
+        btnBulanIni.setText("Bulan Ini");
+        btnBulanIni.addActionListener(this::btnBulanIniActionPerformed);
+
+        jLabel1.setText("Hari Ini:");
+
+        jLabel2.setText("Filter Tanggal:");
+
+        jLabel3.setText("Dari:");
+
+        jLabel4.setText("Sampai:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnKembali)
-                        .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTotalBulan)
-                            .addComponent(lblJumlah)
-                            .addComponent(txtTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnTampil)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnHariIni))
-                            .addComponent(lblTotalHari))
-                        .addGap(156, 156, 156))))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnTampil)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDari, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSampai, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblJumlah)
+                        .addComponent(lblTotalHari)
+                        .addComponent(lblTotalBulan, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnFilter))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnHariIni)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBulanIni))
+                    .addComponent(btnKembali))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(txtTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTampil)
-                    .addComponent(btnHariIni))
-                .addGap(37, 37, 37)
+                    .addComponent(jLabel1)
+                    .addComponent(txtTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnTampil)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtDari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtSampai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnFilter)
+                .addGap(23, 23, 23)
                 .addComponent(lblTotalHari)
                 .addGap(18, 18, 18)
                 .addComponent(lblTotalBulan)
                 .addGap(18, 18, 18)
                 .addComponent(lblJumlah)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHariIni)
+                    .addComponent(btnBulanIni))
+                .addGap(87, 87, 87)
                 .addComponent(btnKembali)
-                .addGap(17, 17, 17))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 977, Short.MAX_VALUE)
         );
 
@@ -178,6 +245,48 @@ public class CashFlowAdminFrame extends javax.swing.JFrame {
         tampilkanLaporan(Date.valueOf(LocalDate.now()));
     }//GEN-LAST:event_btnHariIniActionPerformed
 
+    private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
+        // TODO add your handling code here:
+        try {
+            LocalDate dari = LocalDate.parse(txtDari.getText().trim());
+            LocalDate sampai = LocalDate.parse(txtSampai.getText().trim());
+            if (dari.isAfter(sampai)) {
+                JOptionPane.showMessageDialog(this, "Tanggal awal tidak boleh setelah tanggal akhir");
+                return;
+            }
+            tampilkanRentang(Date.valueOf(dari), Date.valueOf(sampai));
+        } catch (DateTimeParseException ex) {
+            JOptionPane.showMessageDialog(this, "Format tanggal harus yyyy-MM-dd, contoh 2026-11-18");
+        }
+    }//GEN-LAST:event_btnFilterActionPerformed
+
+    private void btnBulanIniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBulanIniActionPerformed
+        // TODO add your handling code here:
+        try {
+            LocalDate dari = LocalDate.parse(txtDari.getText().trim());
+            LocalDate sampai = LocalDate.parse(txtSampai.getText().trim());
+            if (dari.isAfter(sampai)) {
+                JOptionPane.showMessageDialog(this, "Tanggal awal tidak boleh setelah tanggal akhir");
+                return;
+            }
+            tampilkanRentang(Date.valueOf(dari), Date.valueOf(sampai));
+        } catch (DateTimeParseException ex) {
+                JOptionPane.showMessageDialog(this, "Isi tanggal Dari dan Sampai dengan format yyyy-mm-dd, contoh 2026-11-18");
+        }
+    }//GEN-LAST:event_btnBulanIniActionPerformed
+
+    private void txtDariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDariActionPerformed
+
+    private void txtTanggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTanggalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTanggalActionPerformed
+
+    private void txtSampaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSampaiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSampaiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -204,14 +313,22 @@ public class CashFlowAdminFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBulanIni;
+    private javax.swing.JButton btnFilter;
     private javax.swing.JButton btnHariIni;
     private javax.swing.JButton btnKembali;
     private javax.swing.JButton btnTampil;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblJumlah;
     private javax.swing.JLabel lblTotalBulan;
     private javax.swing.JLabel lblTotalHari;
     private javax.swing.JTable tblTransaksi;
+    private javax.swing.JTextField txtDari;
+    private javax.swing.JTextField txtSampai;
     private javax.swing.JTextField txtTanggal;
     // End of variables declaration//GEN-END:variables
 }

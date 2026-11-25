@@ -96,12 +96,17 @@ public class ReceiptUserFrame extends javax.swing.JFrame {
         jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
 
         txtReceipt.setEditable(false);
+        txtReceipt.setBackground(new java.awt.Color(255, 255, 255));
         txtReceipt.setColumns(20);
         txtReceipt.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtReceipt.setRows(5);
+        txtReceipt.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         jScrollPane1.setViewportView(txtReceipt);
 
+        btnSelesai.setBackground(new java.awt.Color(20, 38, 28));
+        btnSelesai.setForeground(new java.awt.Color(255, 255, 255));
         btnSelesai.setText("Selesai");
+        btnSelesai.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 102, 0), new java.awt.Color(0, 102, 0), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 102, 51)));
         btnSelesai.addActionListener(this::btnSelesaiActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -115,15 +120,15 @@ public class ReceiptUserFrame extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(btnSelesai)))
-                .addContainerGap(406, Short.MAX_VALUE))
+                        .addComponent(btnSelesai, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 413, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSelesai)
                 .addGap(17, 17, 17))
         );

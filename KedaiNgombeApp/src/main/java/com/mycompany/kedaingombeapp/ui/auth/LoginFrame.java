@@ -51,7 +51,8 @@ public class LoginFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 0, 0));
 
-        jPanel1.setBackground(new java.awt.Color(26, 31, 22));
+        jPanel1.setBackground(new java.awt.Color(20, 38, 28));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         jPanel1.setPreferredSize(new java.awt.Dimension(1024, 608));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -74,12 +75,12 @@ public class LoginFrame extends javax.swing.JFrame {
         emailLoginForm.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(153, 153, 153)));
         emailLoginForm.addActionListener(this::emailLoginFormActionPerformed);
 
-        btnMasuk.setBackground(new java.awt.Color(52, 88, 48));
+        btnMasuk.setBackground(new java.awt.Color(40, 167, 69));
         btnMasuk.setForeground(new java.awt.Color(255, 255, 255));
         btnMasuk.setText("Masuk");
         btnMasuk.addActionListener(this::btnMasukActionPerformed);
 
-        btnDaftar.setBackground(new java.awt.Color(148, 236, 190));
+        btnDaftar.setBackground(new java.awt.Color(132, 204, 22));
         btnDaftar.setForeground(new java.awt.Color(0, 0, 0));
         btnDaftar.setText("Daftar");
         btnDaftar.addActionListener(this::btnDaftarActionPerformed);
@@ -88,7 +89,8 @@ public class LoginFrame extends javax.swing.JFrame {
         passwordLoginFrom.setForeground(new java.awt.Color(0, 0, 0));
         passwordLoginFrom.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(153, 153, 153)));
 
-        jPanel2.setBackground(new java.awt.Color(30, 63, 32));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         jPanel2.setPreferredSize(new java.awt.Dimension(543, 608));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo.png"))); // NOI18N
@@ -99,16 +101,16 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(33, 33, 33)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -134,7 +136,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addContainerGap(35, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 478, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,6 +175,10 @@ public class LoginFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void emailLoginFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailLoginFormActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailLoginFormActionPerformed
+
     private void btnDaftarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDaftarActionPerformed
         // TODO add your handling code here:
         new RegisterFrame().setVisible(true);
@@ -201,12 +207,10 @@ public class LoginFrame extends javax.swing.JFrame {
             new MenuUserFrame(user).setVisible(true);
         }
         dispose();
+        
+        
 
     }//GEN-LAST:event_btnMasukActionPerformed
-
-    private void emailLoginFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailLoginFormActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailLoginFormActionPerformed
 
     /**
      * @param args the command line arguments

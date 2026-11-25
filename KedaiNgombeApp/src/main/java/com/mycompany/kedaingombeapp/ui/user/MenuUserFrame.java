@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.kedaingombeapp.ui.user;
+import com.mycompany.kedaingombeapp.service.CategoryServices;
 import com.mycompany.kedaingombeapp.model.Menu;
 import com.mycompany.kedaingombeapp.model.User;
 import com.mycompany.kedaingombeapp.service.MenuService;
@@ -27,17 +28,28 @@ public class MenuUserFrame extends javax.swing.JFrame {
      */
     private User user;
     private MenuService menuService = new MenuService();
-    private Map<Integer, Integer> keranjang = new LinkedHashMap<>();  // menuId -> qty
+    private CategoryServices categoryService = new CategoryServices();
+    private Map<Integer, Integer> keranjang = new LinkedHashMap<>();  // menuId ke qty
     private Map<Integer, Menu> infoMenu = new HashMap<>();            // buat hitung total
+    private void categoryButton() {
+    for (String k : categoryService.getNama()) {
+        javax.swing.JButton btn = new javax.swing.JButton(k);
+        btn.addActionListener(e -> tampilkanMenu(menuService.getByKategori(k)));
+        panel1.add(btn);
+    }
+    panel1.revalidate();
+}
 
     public MenuUserFrame() {
         initComponents();
+        categoryButton();
         setLocationRelativeTo(null);
         tampilkanMenu(menuService.getAll());
     }
 
     public MenuUserFrame(User user) {
         initComponents();
+        categoryButton();
         setLocationRelativeTo(null);
         this.user = user;
         tampilkanMenu(menuService.getAll());
@@ -83,144 +95,122 @@ public class MenuUserFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
         panel1 = new java.awt.Panel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         lblTotal = new javax.swing.JLabel();
         btnCheckout = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        btnRiwayat = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 608));
+        setBackground(new java.awt.Color(204, 255, 102));
+
+        panel1.setBackground(new java.awt.Color(20, 38, 28));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Cari :");
+        panel1.add(jLabel1);
+
+        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField1.setColumns(15);
+        jTextField1.addActionListener(this::jTextField1ActionPerformed);
+        panel1.add(jTextField1);
+
+        jButton1.setText("Semua");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        panel1.add(jButton1);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1024, 608));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane1.setViewportView(jPanel1);
 
         lblTotal.setText("Total : Rp 0");
 
+        btnCheckout.setBackground(new java.awt.Color(245, 158, 11));
         btnCheckout.setText("Checkout");
+        btnCheckout.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 153, 0), new java.awt.Color(255, 153, 51), new java.awt.Color(255, 204, 153), new java.awt.Color(204, 204, 0)));
         btnCheckout.addActionListener(this::btnCheckoutActionPerformed);
 
+        btnLogout.setBackground(new java.awt.Color(132, 204, 22));
+        btnLogout.setForeground(new java.awt.Color(0, 0, 0));
         btnLogout.setText("Logout");
+        btnLogout.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 102), new java.awt.Color(153, 255, 153), new java.awt.Color(102, 255, 0), new java.awt.Color(153, 255, 51)));
         btnLogout.addActionListener(this::btnLogoutActionPerformed);
 
-        jPanel2.setPreferredSize(new java.awt.Dimension(1024, 0));
-
-        jLabel1.setText("Cari :");
-
-        jTextField1.setColumns(15);
-        jTextField1.addActionListener(this::jTextField1ActionPerformed);
-
-        jButton1.setText("Semua");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-
-        jButton2.setText("Milk Tea");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
-
-        jButton3.setText("Jasmine Tea");
-        jButton3.addActionListener(this::jButton3ActionPerformed);
-
-        jButton4.setText("Coffee");
-        jButton4.addActionListener(this::jButton4ActionPerformed);
-
-        jButton5.setText("Smoothies");
-        jButton5.addActionListener(this::jButton5ActionPerformed);
-
-        jButton6.setText("Freshmilk");
-        jButton6.addActionListener(this::jButton6ActionPerformed);
-
-        jButton7.setText("Black Tea");
-        jButton7.addActionListener(this::jButton7ActionPerformed);
+        btnRiwayat.setBackground(new java.awt.Color(132, 204, 22));
+        btnRiwayat.setForeground(new java.awt.Color(0, 0, 0));
+        btnRiwayat.setText("Riwayat");
+        btnRiwayat.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 102), new java.awt.Color(153, 255, 153), new java.awt.Color(153, 255, 0), new java.awt.Color(153, 255, 51)));
+        btnRiwayat.addActionListener(this::btnRiwayatActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(jLabel1)
-                .addGap(5, 5, 5)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(jButton1)
-                .addGap(5, 5, 5)
-                .addComponent(jButton2)
-                .addGap(5, 5, 5)
-                .addComponent(jButton3)
-                .addGap(5, 5, 5)
-                .addComponent(jButton4)
-                .addGap(5, 5, 5)
-                .addComponent(jButton5)
-                .addGap(5, 5, 5)
-                .addComponent(jButton6)
-                .addGap(5, 5, 5)
-                .addComponent(jButton7)
-                .addContainerGap(121, Short.MAX_VALUE))
+            .addGap(0, 464, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 20, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel1))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7)))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTotal)
                 .addGap(18, 18, 18)
-                .addComponent(btnCheckout)
+                .addComponent(btnCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRiwayat, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLogout)
-                .addGap(20, 20, 20))
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 849, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(487, 487, 487))
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTotal)
-                    .addComponent(btnCheckout)
-                    .addComponent(btnLogout))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCheckout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTotal)
+                            .addComponent(btnLogout))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnRiwayat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -236,36 +226,6 @@ public class MenuUserFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         tampilkanMenu(menuService.getAll());
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        tampilkanMenu(menuService.getByKategori("Milk Tea"));
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        tampilkanMenu(menuService.getByKategori("Jasmine Tea"));
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        tampilkanMenu(menuService.getByKategori("Freshmilk"));
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        tampilkanMenu(menuService.getByKategori("Black Tea"));
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        tampilkanMenu(menuService.getByKategori("Coffee"));
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        tampilkanMenu(menuService.getByKategori("Smoothies"));
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void btnCheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckoutActionPerformed
         // TODO add your handling code here:
@@ -313,6 +273,18 @@ public class MenuUserFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    private void btnRiwayatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRiwayatActionPerformed
+        // TODO add your handling code here:
+        if (!keranjang.isEmpty()) {
+            int konfirmasi = JOptionPane.showConfirmDialog(this,
+                "Keranjang belum di-checkout dan akan hilang. Lanjut ke riwayat?",
+                "Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (konfirmasi != JOptionPane.YES_OPTION) return;
+        }
+        new RiwayatUserFrame(user).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRiwayatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -341,16 +313,12 @@ public class MenuUserFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCheckout;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnRiwayat;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblTotal;

@@ -2,6 +2,7 @@ package com.mycompany.kedaingombeapp.service;
 
 import com.mycompany.kedaingombeapp.database.DatabaseConnection;
 import com.mycompany.kedaingombeapp.model.User;
+import com.mycompany.kedaingombeapp.util.PasswordUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,10 +10,10 @@ import java.sql.SQLException;
 
 public class AuthService {
 
-    private final PasswordHasher passwordHasher = new PasswordHasher();
     // Proses Login
     public User login(String email, String password) {
-        String query = "SELECT id, NAME, email, ROLE FROM user WHERE email = ? AND PASSWORD = ?";
+        // Ambil berdasarkan email saja, password dicocokkan lewat hash
+        String query = "SELECT id, NAME, email, ROLE, PASSWORD FROM user WHERE email = ?";
 
         try (Connection conn = DatabaseConnection.connect();
             PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -20,16 +21,13 @@ public class AuthService {
             pstmt.setString(1, email.trim());
             ResultSet rs = pstmt.executeQuery();
 
-        if (rs.next()) {
-            String storedPassword = rs.getString("PASSWORD");
-                if (passwordHasher.verify(password, storedPassword)) {
-                    User user = new User();
-                    user.setId(rs.getInt("id"));
-                    user.setNama(rs.getString("NAME"));
-                    user.setEmail(rs.getString("email"));
-                    user.setRole(rs.getString("ROLE"));
-                    return user;
-                }
+        if (rs.next() && PasswordUtil.verify(password, rs.getString("PASSWORD"))) {
+            User user = new User();
+            user.setId(rs.getInt("id"));
+            user.setNama(rs.getString("NAME"));
+            user.setEmail(rs.getString("email"));
+            user.setRole(rs.getString("ROLE"));   
+            return user;
         }
 
         } catch (SQLException e) {
@@ -55,7 +53,6 @@ public class AuthService {
             return false;
         }
 
-        String hashedPassword = passwordHasher.hash(password);
         String query = "INSERT INTO user (NAME, email, PASSWORD, ROLE) VALUES (?, ?, ?, 'customer')";
         
         try (Connection conn = DatabaseConnection.connect();
@@ -63,7 +60,7 @@ public class AuthService {
             
             pstmt.setString(1, nama);
             pstmt.setString(2, email);
-            pstmt.setString(3, hashedPassword);
+            pstmt.setString(3, PasswordUtil.hash(password));   // simpan hash, bukan teks asli
             
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0;

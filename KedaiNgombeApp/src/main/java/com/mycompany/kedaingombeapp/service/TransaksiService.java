@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.kedaingombeapp.service;
 
 import com.mycompany.kedaingombeapp.database.DatabaseConnection;
@@ -11,12 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @author LOQ
- */
 public class TransaksiService {
 
     // Simpan transaksi. Balikin id transaksi, atau -1 kalau gagal.
@@ -87,5 +81,29 @@ public class TransaksiService {
         } finally {
             try { conn.setAutoCommit(true); conn.close(); } catch (SQLException ex) { ex.printStackTrace(); }
         }
+    }
+
+    // Riwayat transaksi satu user: {id, total, bayar, kembalian, waktu}
+    public List<Object[]> riwayatUser(int userId) {
+        List<Object[]> list = new ArrayList<>();
+        String query = "SELECT id, total_harga, bayar, kembalian, created_at "
+                + "FROM transactions WHERE user_id = ? ORDER BY created_at DESC";
+
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                list.add(new Object[]{
+                    rs.getInt("id"), rs.getInt("total_harga"), rs.getInt("bayar"),
+                    rs.getInt("kembalian"), rs.getTimestamp("created_at")
+                });
+            }
+        } catch (SQLException e) {
+            System.out.println("Error pada proses riwayat transaksi: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return list;
     }
 }
